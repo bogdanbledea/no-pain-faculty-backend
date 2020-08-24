@@ -18,9 +18,9 @@ RUN npm run build
 
 COPY ormconfig.js ./dist
 COPY .env ./dist
-WORKDIR ./dist
+# WORKDIR /dist
 
 
 EXPOSE 4000
 
-CMD node index.js
+CMD node dist/index.js
