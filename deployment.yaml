@@ -1,0 +1,47 @@
+# backend deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: registry.gitlab.com/bogdanbledea/no-pain-faculty:backend-v9
+        env:
+          - name: "ORIGIN_URL"
+          value: "http://173.193.79.140:32760"
+        ports:
+        - containerPort: 4000
+      imagePullSecrets:
+        - name: regcred
+
+# backend service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend
+  name: backend
+  namespace: default
+spec:
+  ports:
+  - nodePort: 31234
+    port: 4000
+    protocol: TCP
+    targetPort: 4000
+  selector:
+    app: backend
+  type: NodePort
+status:
+  loadBalancer: {}
