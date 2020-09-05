@@ -13,7 +13,7 @@ module.exports = {
   },
   "logging": false,
   "entities": [
-    "entity/**/*"
+     process.env.ORIGIN_URL ? "entity/**/*" : "src/entity/**/*"
  ],
  "migrations": [
     "src/migration/**/*"
