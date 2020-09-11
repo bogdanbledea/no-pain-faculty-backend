@@ -5,6 +5,7 @@ import { MyContext } from './MyContext';
 import { createRefreshToken, createAccessToken } from './auth';
 import { isAuth } from './isAuth';
 import { sendRefreshToken } from './sendRefreshToken';
+import { sendMail } from './mail.service';
 
 @ObjectType()
 class LoginResponse {
@@ -63,6 +64,7 @@ class LoginResponse {
       @Arg('email') email: string,
       @Arg('password') password: string
     ){
+      sendMail({to: email, message: 'Hi User, you registered succesfully!'});
       const hashedPassword = await hash(password, 12);
       try {
         await User.insert({

@@ -12,41 +12,8 @@ import { User } from "./entity/User";
 import { createAccessToken, createRefreshToken } from "./auth";
 import { sendRefreshToken } from "./sendRefreshToken";
 import cors from 'cors';
-import * as nodemailer from 'nodemailer';
 
 const ALLOW_ORIGIN = process.env.ORIGIN_URL || 'http://localhost:3000';
-console.log(ALLOW_ORIGIN);
-
-export const transporter = nodemailer.createTransport({
-    host: process!.env.MAIL_HOST!,
-    port: 465,
-    auth: {
-        user: process!.env.MAIL_USER,
-        pass: process!.env.MAIL_PASS
-    },
-    tls: {
-      rejectUnauthorized:false
-  }
-});
-
-// let message = {
-//   from: 'No Pain faculty <contact@bogdanbledea.ro>',
-//   to: 'Recipient <bledeabogdanalexandru@gmail.com>',
-//   subject: 'No Pain Faculty - Register succesfully',
-//   text: 'Hi! You just registered to no-pain-faculty app. We are glad to have you here.',
-//   html: 'Hi! You just registered to <a href="">no-pain-faculty</a> app. We are glad to have you here.'
-// };
-
-// transporter.sendMail(message, (err, info:any):any => {
-//   if (err) {
-//       console.log('Error occurred. ' + err.message);
-//       return process.exit(1);
-//   }
-
-//   console.log('Message sent: %s', info.messageId);
-//   // Preview only available when sending through an Ethereal account
-//   console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-// });
 
 (async () => {
   const app = express();
