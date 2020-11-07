@@ -23,7 +23,7 @@ const ALLOW_ORIGIN = process.env.ORIGIN_URL || 'http://localhost:3000';
   }));
   app.use(cookieParser());
   app.get('/', (_, res) => {
-    res.send('Hello world!');
+    res.send('Hello world testing!');
   });
 
   app.post('/refresh_token', async (req, res) => {
