@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: registry.gitlab.com/bogdanbledea/no-pain-faculty:backend-v20
+        image: registry.gitlab.com/bogdanbledea/no-pain-faculty:backend-VERSION
         envFrom:
           - secretRef:
               name: app-secrets

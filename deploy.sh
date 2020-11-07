@@ -12,4 +12,4 @@ echo "The build number is ${TRAVIS_BUILD_NUMBER}"
   --server=$KUBERNETES_SERVER \
   --certificate-authority=cert.crt \
   --token=$KUBERNETES_TOKEN \
-  set image deployment/pypytest pypytest=<dockerUser>/pypytest:${TRAVIS_BUILD_NUMBER} --record
+  set image deployment/backend backend=registry.gitlab.com/bogdanbledea/no-pain-faculty:backend-${TRAVIS_BUILD_NUMBER} --record
