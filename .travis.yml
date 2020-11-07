@@ -13,5 +13,4 @@ before_install:
   - docker push registry.gitlab.com/bogdanbledea/no-pain-faculty
 script:
 - bash updateKube.sh
-after_script:
 - bash deploy.sh
