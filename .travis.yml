@@ -5,6 +5,13 @@ install:
   - mkdir ${HOME}/.kube
   - echo "$KUBE_CERTIFICATE_AUTHORITY" | base64 --decode > ${HOME}/.kube/ca-aaa00-nopainfaculty.pem
   - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
-
+  - echo "$DOCKER_PASSWORD" | docker login registry.gitlab.com -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t registry.gitlab.com/bogdanbledea/no-pain-faculty:$TRAVIS_BUILD_NUMBER .
+  - docker push registry.gitlab.com/bogdanbledea/no-pain-faculty
 script:
-  - kubectl get pods
+- bash updateKube.sh
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    branch: master
