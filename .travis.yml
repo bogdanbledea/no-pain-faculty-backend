@@ -3,7 +3,7 @@ install:
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
   - mkdir ${HOME}/.kube
-  - echo "$KUBE_CERTIFICATE_AUTHORITY" | BASE64 --DECODE > ${HOME}/.kube/ca-aaa00-nopainfaculty.pem
+  - echo "$KUBE_CERTIFICATE_AUTHORITY" | base64 --decode > ${HOME}/.kube/ca-aaa00-nopainfaculty.pem
   - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
 
 script:
