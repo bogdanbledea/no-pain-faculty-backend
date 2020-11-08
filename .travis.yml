@@ -1,16 +1,9 @@
-language: bash
-sudo: required
-branches:
-  only:
-  - master
-services:
-- docker
-before_install:
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-  - chmod +x kubectl && sudo mv kubectl /usr/local/bin/kubectl
-  - echo "$DOCKER_PASSWORD" | docker login registry.gitlab.com -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t registry.gitlab.com/bogdanbledea/no-pain-faculty:$TRAVIS_BUILD_NUMBER .
-  - docker push registry.gitlab.com/bogdanbledea/no-pain-faculty
+install:
+  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  - chmod +x ./kubectl
+  - sudo mv ./kubectl /usr/local/bin/kubectl
+  - mkdir ${HOME}/.kube
+  - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
+
 script:
-- bash updateKube.sh
-- bash deploy.sh
+  - kubectl get pods
